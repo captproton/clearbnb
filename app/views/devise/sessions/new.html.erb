@@ -20,21 +20,38 @@
             </p>
 
             <div class="mt-1 grid grid-cols-1">
-              <p>yo</p>
               <div>
                 <!-- attempt to fix error: https://github.com/heartcombo/devise/issues/5236
                      viktorianer commented on Dec 29, 2021 
+
+                     So far, button_to is the winner.  Would like to improve with plain html.
                 -->
+                <!--
+                     As of 9/26/22, there is stll an auth bug, but it's probably in
+                     the set-up of the google auth, not the code.
+
+                     18:26:34 web.1  | D, [2022-09-26T18:26:34.383955 #6639] DEBUG -- omniauth: (google) Callback phase initiated.
+
+                    18:26:34 web.1  | E, [2022-09-26T18:26:34.578640 #6639] ERROR -- omniauth: (google) Authentication failure! invalid_credentials: OAuth2::Error, invalid_client: Unauthorized
+                    18:26:34 web.1  | {
+                    18:26:34 web.1  |   "error": "invalid_client",
+                    18:26:34 web.1  |   "error_description": "Unauthorized"
+                    18:26:34 web.1  | }
+                    18:26:34 web.1  | Processing by Users::OmniauthCallbacksController#failure as HTML
+                    18:26:34 web.1  |   Parameters: {"state"=>"[FILTERED]", "code"=>"[FILTERED]", "scope"=>"email https://www.googleapis.com/auth/userinfo.email openid", "authuser"=>"0", "hd"=>"[FILTERED (example.com)]", "prompt"=>"consent"}
+                -->
+                <%= button_to "Google", user_google_omniauth_authorize_path,
+                    "data-turbo": false, 
+                    style: "cursor: pointer;",
+                    class: "w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50" %>
+                <hr>
                   <span class="sr-only">Sign in with Google</span>
-                <button href="/users/auth/google" data-method="post" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                  Google
-                </button>
               </div>
               <div>
-                <a href="/users/auth/google" data-method="post" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                <!-- <a href="/users/auth/google" data-method="post" data-turbo="false" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                   <span class="sr-only">Sign in with Google</span>
                   Google
-                </a>
+                </a> -->
               </div>
             </div>
           </div>
